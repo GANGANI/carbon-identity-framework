@@ -668,10 +668,24 @@ public class UserProfileAdmin extends AbstractAdmin {
      * @throws UserProfileException
      */
     public String getNameAssociatedWith(String idpID, String associatedID) throws UserProfileException {
-        
+        return getNameAssociatedWith(CarbonContext.getThreadLocalCarbonContext().getTenantDomain(),
+                    idpID, associatedID);
+    }
+
+    /**
+     * Return the username of the local user associated with the given federated identifier and tenant domain.
+     *
+     * @param tenantDomain Tenant domain
+     * @param idpID        Identity Provider ID
+     * @param associatedID Federated Identity ID
+     * @return the username of the user associated with
+     * @throws UserProfileException If an error occurred while retrieving user association.
+     */
+    public String getNameAssociatedWith(String tenantDomain, String idpID, String associatedID)
+            throws UserProfileException {
+
         try {
-            return getFederatedAssociationManager().getUserForFederatedAssociation(
-                    CarbonContext.getThreadLocalCarbonContext().getTenantDomain(), idpID, associatedID);
+            return getFederatedAssociationManager().getUserForFederatedAssociation(tenantDomain, idpID, associatedID);
         } catch (FederatedAssociationManagerException e) {
             String msg = "Error while retrieving user associated for federated IdP: " + idpID + " with federated " +
                     "identifier:" + associatedID + " in tenant: " + getTenantDomain();

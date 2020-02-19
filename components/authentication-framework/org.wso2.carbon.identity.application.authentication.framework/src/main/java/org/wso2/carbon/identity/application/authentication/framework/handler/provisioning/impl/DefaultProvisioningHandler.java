@@ -152,7 +152,7 @@ public class DefaultProvisioningHandler implements ProvisioningHandler {
 
                 UserProfileAdmin userProfileAdmin = UserProfileAdmin.getInstance();
 
-                if (StringUtils.isEmpty(userProfileAdmin.getNameAssociatedWith(idp, subjectVal))) {
+                if (StringUtils.isEmpty(userProfileAdmin.getNameAssociatedWith(tenantDomain, idp, subjectVal))) {
                     // Associate User
                     associateUser(username, userStoreDomain, tenantDomain, subjectVal, idp);
                 }
