@@ -124,6 +124,12 @@ public class IdentityConstants {
     public final static String COOKIE_HTTP_ONLY = "httpOnly";
     public final static String COOKIE_SAME_SITE = "sameSite";
 
+    // Reverse Proxy Configs.
+    public final static String REVERSE_PROXY_CONFIG = "ReverseProxyConfig";
+    public final static String REVERSE_PROXY = "ReverseProxy";
+    public final static String PROXY_CONTEXT = "ProxyContext";
+    public final static String DEFAULT_CONTEXT = "DefaultContext";
+
     // HTTP headers which may contain IP address of the client in the order of priority
     public static final String[] HEADERS_WITH_IP = {
             "X-Forwarded-For",
@@ -512,5 +518,16 @@ public class IdentityConstants {
         public static final String SUPPORTS_CREDENTIALS = "CORS.SupportsCredentials";
         public static final String MAX_AGE = "CORS.MaxAge";
         public static final String TAG_REQUESTS = "CORS.TagRequests";
+    }
+
+    /**
+     * Contains the constants related to Reverse Proxy configs elements.
+     */
+    public static class ReverseProxyConfigElements {
+
+        public final static String REVERSE_PROXY_CONFIG = "ReverseProxyConfig";
+        public final static String REVERSE_PROXY = "ReverseProxy";
+        public final static String PROXY_CONTEXT = "ProxyContext";
+        public final static String DEFAULT_CONTEXT = "DefaultContext";
     }
 }

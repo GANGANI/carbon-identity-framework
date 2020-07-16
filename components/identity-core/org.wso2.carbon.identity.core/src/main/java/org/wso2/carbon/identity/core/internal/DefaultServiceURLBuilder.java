@@ -27,6 +27,7 @@ import org.wso2.carbon.context.PrivilegedCarbonContext;
 import org.wso2.carbon.identity.core.ServiceURL;
 import org.wso2.carbon.identity.core.ServiceURLBuilder;
 import org.wso2.carbon.identity.core.URLBuilderException;
+import org.wso2.carbon.identity.core.model.ReverseProxyConfig;
 import org.wso2.carbon.identity.core.util.IdentityCoreConstants;
 import org.wso2.carbon.identity.core.util.IdentityTenantUtil;
 import org.wso2.carbon.identity.core.util.IdentityUtil;
@@ -204,14 +205,15 @@ public class DefaultServiceURLBuilder implements ServiceURLBuilder {
         StringBuilder urlPathBuilder = new StringBuilder();
         if (ArrayUtils.isNotEmpty(urlPaths)) {
             for (String path : urlPaths) {
-                if (StringUtils.isNotBlank(path)) {
-                    if (path.endsWith("/")) {
-                        path = path.substring(0, path.length() - 1);
+                String proxyContext = IdentityUtil.getProxyContext(path);
+                if (StringUtils.isNotBlank(proxyContext)) {
+                    if (proxyContext.endsWith("/")) {
+                        proxyContext = proxyContext.substring(0, proxyContext.length() - 1);
                     }
-                    if (path.startsWith("/")) {
-                        path = path.substring(1);
+                    if (proxyContext.startsWith("/")) {
+                        proxyContext = proxyContext.substring(1);
                     }
-                    urlPathBuilder.append(path).append("/");
+                    urlPathBuilder.append(proxyContext).append("/");
                 }
             }
             if (urlPathBuilder.length() > 0 && urlPathBuilder.charAt(urlPathBuilder.length() - 1) == '/') {
